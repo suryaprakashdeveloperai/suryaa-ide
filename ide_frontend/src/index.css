@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#0A0D14] text-[#F3F4F6];
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* Custom Sleek Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #232A3B;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #374151;
+}
+
+/* ══════════════════════════════════════════════════
+   SURYAA IDE — KEYFRAME ANIMATIONS ENGINE
+   ══════════════════════════════════════════════════ */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideLeft {
+  from { transform: translateX(30px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideRight {
+  from { transform: translateX(-30px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes rotate360 {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes bounceSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.03); }
+}
+
+@keyframes shakeWidget {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.anim-fade-in { animation: fadeIn 0.6s ease-in-out forwards; }
+.anim-scale-up { animation: scaleUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.anim-slide-up { animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.anim-slide-down { animation: slideDown 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.anim-slide-left { animation: slideLeft 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.anim-slide-right { animation: slideRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.anim-rotate { animation: rotate360 2s linear infinite; }
+.anim-bounce { animation: bounceSlow 1.5s ease-in-out infinite; }
+.anim-pulse { animation: pulseGlow 2s ease-in-out infinite; }
+.anim-shake { animation: shakeWidget 0.4s ease-in-out; }
+
+/* ══════════════════════════════════════════════════
+   MONACO EDITOR — DARK THEME REFINEMENTS
+   ══════════════════════════════════════════════════ */
+.monaco-editor .find-widget {
+  background-color: #161B26 !important;
+  color: #E2E8F0 !important;
+  border: 1px solid #2A3447 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6) !important;
+  border-radius: 8px !important;
+  padding: 4px !important;
+}
+
+.monaco-editor .find-widget .monaco-findInput {
+  background-color: #0E121C !important;
+  border: 1px solid #232A3B !important;
+  border-radius: 6px !important;
+}
+
+.monaco-editor .find-widget .monaco-inputbox {
+  background-color: #0E121C !important;
+  color: #F8FAFC !important;
+}
+
+.monaco-editor .find-widget input {
+  background-color: transparent !important;
+  color: #F8FAFC !important;
+  font-family: inherit !important;
+}
+
+.monaco-editor .find-widget .button {
+  color: #94A3B8 !important;
+  border-radius: 4px !important;
+}
+
+.monaco-editor .find-widget .button:hover {
+  background-color: #1E2536 !important;
+  color: #FFFFFF !important;
+}
+
+.monaco-editor .quick-input-widget {
+  background-color: #161B26 !important;
+  border: 1px solid #2A3447 !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7) !important;
+}
+

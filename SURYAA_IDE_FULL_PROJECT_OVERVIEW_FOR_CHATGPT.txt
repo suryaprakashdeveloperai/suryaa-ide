@@ -1,0 +1,367 @@
+================================================================================
+          SURYAA IDE v3 — COMPREHENSIVE SYSTEM ARCHITECTURE & FEATURE OVERVIEW
+                  (Complete Specification for ChatGPT Brainstorming & Feedback)
+================================================================================
+
+CREATOR & ATTRIBUTION:
+  • Creator: Surya Prakash T
+  • Background: B.Tech in Artificial Intelligence & Machine Learning
+  • Platform: Suryaa IDE v3 (Professional Visual Flutter Full-Stack Studio)
+  • Repository: Multi-workspace (ide_frontend + ide_backend + workspace)
+  • Build Status: Active Production Baseline (All Frontend & Backend Tests Passing)
+
+================================================================================
+1. EXECUTIVE SUMMARY & PLATFORM VISION
+================================================================================
+Suryaa IDE is a next-generation, professional visual studio designed for building
+production-grade Flutter applications backed by high-performance Python (FastAPI),
+PostgreSQL 16, and Docker infrastructure.
+
+Unlike traditional drag-and-drop website builders that output fragile or messy code,
+Suryaa IDE deterministicly compiles visual canvas component trees directly into:
+  1. Clean, Null-Safe, Enterprise Dart code following strict MVVM (Model-View-ViewModel)
+     architecture with Provider/ChangeNotifier and GoRouter.
+  2. Production-ready FastAPI Python backends with Pydantic v2 validation schemas,
+     SQLAlchemy ORM models, Alembic migrations, and JWT authentication.
+  3. Resilient Docker Compose environments featuring PostgreSQL 16 with persistent
+     Docker storage volumes (ensuring data survives workspace changes).
+  4. Real-time streaming pipelines connecting continuous IoT, telemetry, or WebSocket
+     feeds directly to dynamic Multi-Axis fl_chart line/bar/pie visualizations.
+
+================================================================================
+2. TECHNICAL ARCHITECTURE & STACK
+================================================================================
+
+A. FRONTEND (ide_frontend):
+  • Core Framework: React 19 + TypeScript 5.7
+  • Bundler & Dev Server: Vite 6.4.5 (Lightning fast HMR, dev on http://localhost:3000)
+  • State Management: Zustand 5.0 store (`store.ts`) with deep undo/redo history stacks,
+    real-time AST state synchronization, and reactive dirty indicators.
+  • Styling: TailwindCSS 3.4 + Custom CSS Design System tokens & CSS variables.
+  • Code Editor: Monaco Editor (VS Code core engine) with syntax highlighting for
+    Dart, Python, YAML, JSON, Dockerfile, and Markdown.
+  • Icons: Lucide React (over 40 bespoke vector icons).
+  • Build Artifacts: Minified production bundle (dist/assets/index.js + index.css).
+
+B. BACKEND (ide_backend):
+  • Web Framework: FastAPI 0.115+ (Asynchronous ASGI server on http://127.0.0.1:8001)
+  • Language: Python 3.12 (Strict typing, async/await throughout)
+  • ORM & Database: SQLAlchemy 2.0 + SQLite (development) & PostgreSQL 16 (production)
+  • Schemas & Serialization: Pydantic v2
+  • Security & Hashing: Passlib (Bcrypt) + PyJWT (HS256 Bearer Token authorization)
+  • Testing Suite: Pytest 9.1 with pytest-asyncio (11/11 tests passing)
+  • Dart Formatter Integration: Google Dart SDK 3.13.7 CLI wrapper for formatting.
+
+C. CONTAINERIZATION & DATABASE PERSISTENCE:
+  • Standalone Dockerfile for FastAPI Stream Worker
+  • Docker Compose v3.9 orchestration
+  • PostgreSQL 16 official image (`postgres:16-alpine`)
+  • Named Persistent Volume (`postgres_data:`) mapped to `/var/lib/postgresql/data`
+  • Container Isolation: Backend containers run independently from the UI studio.
+
+================================================================================
+3. COMPREHENSIVE BREAKDOWN OF CURRENTLY IMPLEMENTED FEATURES
+================================================================================
+
+--------------------------------------------------------------------------------
+3.1. VISUAL DESIGN CANVAS & MULTI-DEVICE EMULATOR
+--------------------------------------------------------------------------------
+• Realistic Device Frames:
+  - Apple iPhone 16 Pro (393 × 852 px, Dynamic Island notch)
+  - Google Pixel 9 (412 × 915 px, Android punch-hole camera)
+  - Samsung Galaxy S24 (360 × 780 px, compact Android bezel)
+  - Samsung Galaxy Tab 11'' (800 × 1200 px, Android Tablet frame)
+  - iPad Pro (820 × 1180 px, Apple iPad OS bezel)
+  - Desktop 1080p / Web (1200 × 780 px, macOS-style window header)
+  - Foldable Device (375 × 904 px folded / 768 × 888 px unfolded)
+  - Multi-Viewport Comparison (Side-by-side viewports)
+• Infinite Canvas Pan & Zoom:
+  - Spacebar + Drag anywhere on the canvas to pan smoothly.
+  - Hand Tool (H shortcut) and Select Tool (V shortcut).
+  - Mouse Wheel Zoom: `Ctrl + Wheel` / `Cmd + Wheel` (30% to 200%).
+  - One-click Fit to Screen (Focus button) and Center Canvas.
+• Visual Manipulation & 8 Perimeter Resize Handles:
+  - 8 draggable handles (NW, N, NE, E, SE, S, SW, W) with mouse delta tracking.
+  - Live width and height indicators.
+  - Component Lock / Unlock toggle (prevents accidental movements).
+  - Component Hide / Show toggle.
+  - Breadcrumb navigation trail: `Scaffold > Column > Card > Text`.
+  - Duplicate component (Ctrl+D) and Delete component.
+• Multi-Page & Screen Switcher:
+  - Instant screen dropdown switcher on canvas header.
+  - `[+ New Page]` creator modal: automatically generates Flutter routes (`/login`, `/profile`, `/settings`, etc.).
+  - Visual page deletion with route safety checks.
+• Drag-and-Drop Drop Zones:
+  - Dragging from widget palette into empty canvas or nested containers.
+  - Visual dashed blue drop guides and hover highlights.
+
+--------------------------------------------------------------------------------
+3.2. ORIENTATION POLICY ENGINE & ADAPTIVE LANDSCAPE SPLITTING
+--------------------------------------------------------------------------------
+• 3 Orientation Policies:
+  1. `🔄 Both (Adaptive Split)` (Default): The application is fully responsive. When rotated
+     to landscape (e.g. 852 × 393 px), single vertical columns automatically split into
+     a responsive 2-column grid (`grid grid-cols-2 gap-3`), allowing charts, cards, and
+     gauges to sit side-by-side gracefully without clipping or vertical squishing.
+  2. `📱 Portrait Only`: Locks orientation to vertical portrait. If user clicks rotation,
+     a confirmation dialog prompts whether to unlock adaptive mode.
+  3. `🖥️ Landscape Only`: Locks orientation to horizontal wide landscape.
+• Live Emulator Orientation Toggle:
+  - Instant rotate button (`RotateCw`) next to the device badge.
+  - Preserves scroll positions, form inputs, and state during rotation.
+
+--------------------------------------------------------------------------------
+3.3. FIVE MASTER STUDIO MODES
+--------------------------------------------------------------------------------
+The IDE features 5 specialized studio viewports accessible via the top center bar:
+  1. `Design Mode`: Full visual editor with bounding boxes, resize handles, drag-and-drop,
+     property badges, and component inspection.
+  2. `Preview Mode`: Clean, photorealistic presentation mode removing all IDE handles,
+     outlines, and helper chips for client demos and presentation screenshots.
+  3. `Runtime Mode`: Fully interactive live application simulation! Users can click buttons,
+     type text into TextFields, toggle checkboxes, switch tabs in TabBar, and test live logic.
+  4. `Logic Mode`: Visual workflow node graph representing triggers, API calls, state setters,
+     navigation events, and notifications with node-edge connecting lines.
+  5. `Code Mode`: Embedded Monaco code editor displaying live-generated clean Dart code
+     (Views, ViewModels, Themes, Routes) and Python FastAPI code.
+
+--------------------------------------------------------------------------------
+3.4. RICH COMPONENT CATALOG & KPI/CHART STUDIO
+--------------------------------------------------------------------------------
+Categorized widget catalog with search and accordion panels:
+• Structural & Navigation:
+  - `Scaffold`: Root screen container with AppBar, Drawer, and NavigationRail support.
+  - `AppBar`: Top navigation bar with title, back button, actions, elevation, and one-click title editing.
+  - `NavigationDrawer`: Slide-out sidebar menu with user profile header and screen routes.
+  - `NavigationRail`: Vertical icon sidebar optimized for tablets and desktop layouts.
+  - `TabBar`: Multi-tab page navigation with animated tab indicators across presets.
+  - `BottomNavigationBar`: Fixed bottom navigation bar with active icon tinting.
+• Layout & Containers:
+  - `Container`: Customizable box with margin, padding, border radius, background color, borders, and shadows.
+  - `Card`: Elevated surface card with preset-specific depth styling.
+  - `Column`: Vertical flex container with alignment and adaptive landscape split.
+  - `Row`: Horizontal flex container with main/cross axis alignment.
+  - `Center`: Centering wrapper.
+  - `SizedBox`: Precise spacer widget.
+  - `ListView`: Scrollable vertical collection of child widgets.
+  - `GridView`: Multi-column scrollable grid with cross-axis count controls.
+• Basic & Form Controls:
+  - `Text`: Typography widget with custom Google Fonts, font size, weight, color, and dynamic API data binding.
+  - `TextField`: Input box with floating labels, hint text, password masking, and live runtime typing.
+  - `ElevatedButton`: Clickable action button with presets, icons, navigation triggers, and runtime alerts.
+  - `Image`: Asset and network image previewer with border radius and aspect ratio clipping.
+• Media:
+  - `VideoPlayer`: Embedded video player widget with controls, autoplay, and aspect ratios.
+• Advanced Analytics & Chart Engine:
+  - `MultiAxisChart` / `LineChart`: Full dual-axis telemetry charts powered by `fl_chart` in Dart.
+    Supports primary Y-axis (left, e.g. PSI) and secondary Y-axis (right, e.g. °C), curved spline lines,
+    gradient fills, gridlines, and real-time streaming data points.
+  - `CircularGauge`: Precision radial gauge widget with percentage indicator, min/max scales, and color arcs.
+  - `ArcGauge`: Half-circle speedometer/tachometer gauge.
+  - `16 Specialized KPI Card Presets`: Revenue cards, trend indicators with % arrows, progress trackers,
+    system health monitors, network throughput badges, latency counters, and server load meters.
+
+--------------------------------------------------------------------------------
+3.5. DESIGN SYSTEM & SIX LUXURY VISUAL PRESETS
+--------------------------------------------------------------------------------
+Suryaa IDE has a custom design system with 6 distinct aesthetic engines:
+  1. `Glassmorphism`: Frosted translucent backgrounds (`backdrop-filter: blur(16px)`),
+     ultra-subtle white border highlights, ambient glowing drop shadows.
+  2. `Neobrutalism`: High-contrast 2.5px solid black borders, flat 4px offset hard shadows (`box-shadow: 4px 4px 0 #000`),
+     vibrant primary colors (#FFE600 yellow, cyan), bold sans typography.
+  3. `Claymorphism`: 3D inflated soft-clay aesthetic, dual inner and outer shadows (`inset -5px -5px 10px`),
+     extra rounded corners (24px radius), tactile pillowy feel.
+  4. `Skeuomorphism`: Realistic tactile finishes, brushed metal and cream gradients, debossed inset borders,
+     subtle top highlights and bottom shadow depth.
+  5. `Neumorphism`: Soft extruded minimalist surfaces with matching background tones and dual-direction
+     soft light/dark shadows.
+  6. `Cyberpunk / Neon`: High-tech dark terminal interface (`#0A0A14`), electric cyan (`#00FFCC`) and amber
+     glows, monospace coordinate trackers, and glowing laser borders.
+• Global Light and Dark mode switcher with instant emulator palette recalculation.
+• Theme tokens for primaryColor, secondaryColor, backgroundColor, surfaceColor, borderRadius, blur, elevation.
+
+--------------------------------------------------------------------------------
+3.6. FULL-STACK CARD BUILDER (UI-TO-API-TO-DB AUTOMATION)
+--------------------------------------------------------------------------------
+When dropping or creating a Card or Container:
+• The IDE opens the Full-Stack Card Architect modal.
+• User enters the Card Title (e.g. "Turbine Pressure Sensor").
+• User chooses whether to create an automated API endpoint and Database model.
+• The system automatically:
+  1. Generates a FastAPI endpoint (`GET /api/v1/turbines/pressure`).
+  2. Generates a Pydantic response schema with realistic mock values.
+  3. Creates an SQLAlchemy database table model.
+  4. Registers the API connector in `apiConnectors`.
+  5. Binds the visual widget directly to the API field (`dataBinding: { connectorId, field }`).
+  6. Renders live fetched data inside the canvas emulator!
+
+--------------------------------------------------------------------------------
+3.7. STREAM URL FULL-STACK ARCHITECT (`[ ⚡ Stream Architect ]`)
+--------------------------------------------------------------------------------
+A 5-step guided wizard to build an entire end-to-end streaming telemetry application:
+• Step 1: Stream Connection & Presets:
+  - Input field for Live Stream URL (`wss://...` or `https://...`).
+  - 4 One-click Quick Presets:
+    1. Industrial Turbine IoT (`wss://factory.iot-cloud.com/v1/sensors/live`, Tag: `turbine_telemetry_04`)
+    2. Financial Market Ticker (`wss://stream.binance.com/ws/btcusdt@trade`, Tag: `market_depth_btc`)
+    3. Server Cluster Observability (`wss://monitor.cloud-cluster.net/telemetry`, Tag: `cluster_node_metrics`)
+    4. Corporate Executive Telemetry (`wss://telemetry.enterprise.io/live`, Tag: `facility_energy_feed`)
+  - Stream Tag / Metric Topic Path input space (e.g. `turbine.generator.01`): The backend consumer
+    specifically filters incoming JSON frames for keys nested under this tag.
+• Step 2: Dynamic X & Y Axes Mapping:
+  - X-Axis Coordinate Tag (e.g. `timestamp`, `frame_id`, `time_utc`).
+  - Primary Y-Axis Tag (Left axis, e.g. `pressure_psi`, `price_usd`, `cpu_usage_pct`).
+  - Secondary Y-Axis Tag (Right axis, e.g. `temperature_c`, `volume_24h`, `memory_gb`).
+• Step 3: Containerized Standalone Docker & PostgreSQL 16:
+  - Checkbox: Generate `backend/Dockerfile` and `backend/docker-compose.yml`.
+  - Checkbox: Generate PostgreSQL 16 persistence volume (`postgres_data`).
+  - Resilient separation: The Docker container and database persist independently even if local
+    backend source files are deleted or modified.
+  - Checkbox: JWT Authentication with Bcrypt hashing and PyJWT token generation.
+• Step 4: 4 Curated High-End Customizable Login Screens:
+  1. `⚡ Biometric Cyberpunk HUD`: Neon border glow, biometric fingerprint ripple button,
+     holographic status badge, and monospace cipher inputs.
+  2. `🏢 Nova Executive Clean SaaS`: Minimalist slate aesthetic, Inter typography, tabbed
+     Sign In / Create Account switch, corporate ambient shadows.
+  3. `📟 Mission Control Terminal`: Aerospace military clearance header, hardware node ID
+     detection, security PIN matrix, and ASCII pulse.
+  4. `🌌 Fintech Aurora Glass`: Mesh gradient aurora background, frosted glassmorphism card (blur 24px),
+     smooth floating inputs and instant unlock.
+• Step 5: Multi-Screen Suite & Orientation Policy Selection:
+  - Orientation Policy selector: `Both (Adaptive)`, `Portrait Only`, `Landscape Only`.
+  - Checkboxes for `/login`, `/`, `/telemetry`, `/logs` screens.
+  - Synthesis Plan summary with `[ Confirm & Build Full Application ]` trigger.
+• Code Generation Output:
+  - `backend/Dockerfile`
+  - `backend/docker-compose.yml` (FastAPI worker + PostgreSQL 16 container)
+  - `backend/requirements.txt`
+  - `backend/app/main.py`
+  - `backend/app/database.py` (SQLAlchemy 2.0 engine)
+  - `backend/app/models/user.py` & `backend/app/models/telemetry.py`
+  - `backend/app/api/v1/auth.py` (JWT login, register, token refresh)
+  - `backend/app/api/v1/stream.py` (WebSocket live broadcast and ingestion)
+  - `lib/features/auth/views/login_view.dart` (Selected login UI style)
+  - `lib/features/auth/services/auth_service.dart` (Token storage & login API)
+  - `lib/features/telemetry/views/dashboard_view.dart` (Live dual-axis fl_chart telemetry)
+  - `lib/features/telemetry/view_models/stream_view_model.dart` (WebSocketChannel listener)
+  - `lib/app/routes/app_routes.dart` (GoRouter with auth redirects)
+
+--------------------------------------------------------------------------------
+3.8. MULTI-MODEL AI STUDIO (COPILOT)
+--------------------------------------------------------------------------------
+• Model Selection Dropdown:
+  - Google Gemini: `gemini-2.5-pro`, `gemini-2.5-flash`
+  - Anthropic Claude: `claude-3-7-sonnet`, `claude-3-5-haiku`
+  - Arena.ai Multi-Model Free Router (12+ SOTA Models):
+    * DeepSeek V3 & DeepSeek R1
+    * Meta Llama 3.3 70B & Llama 3.1 405B
+    * Qwen 2.5 72B & Qwen 2.5 Coder
+    * Mistral Large 2 & Codestral
+• Modes of Operation:
+  - Visual Design Prompting: Type natural language instructions (e.g. "Add 4 industrial KPI cards
+    with glassmorphism styling and a dual-axis telemetry line chart") and see changes applied
+    directly to the canvas!
+  - App Scaffold Generator: Generates full multi-page layout structures.
+  - Component Generator: Generates targeted subtrees.
+  - Code Modifier: Directly patches Dart and Python files.
+• Diff Viewer & AST Patching:
+  - Shows line-by-line colored diffs before applying changes.
+  - Safe rollback and history integration.
+
+--------------------------------------------------------------------------------
+3.9. CODE EDITOR, STORAGE MANAGER & BUILD DIAGNOSTICS
+--------------------------------------------------------------------------------
+• Monaco Code Editor (Code Mode):
+  - Multi-tab file strip (`main.dart`, `app_theme.dart`, `home_view.dart`, `home_view_model.dart`,
+    `docker-compose.yml`, `main.py`, etc.).
+  - File picker dropdown with icons (`🐳` for Docker, `🗄️` for database/models, `📱` for views,
+    `🧠` for viewmodels, `📦` for yaml, `🐍` for python).
+  - One-click file copy button with success feedback.
+• Storage Manager (Left Panel):
+  - Visual file & folder tree explorer.
+  - Expand/collapse folders.
+  - Click file to immediately open in Monaco editor.
+• Bottom Drawer Terminal:
+  - Live build logs and terminal output.
+  - Stream ingestion logs (`[Stream Architect] Standalone Docker & PostgreSQL 16 backend created`).
+  - SDK Diagnostics & Flutter toolchain verification.
+• Download Center & APK Simulation:
+  - One-click ZIP download of the complete codebase.
+  - APK build simulation with progress bar and SHA-256 fingerprint verification.
+
+--------------------------------------------------------------------------------
+3.10. ANDROID MANAGER, SECURITY SCANNER & BILLING
+--------------------------------------------------------------------------------
+• Android Manager:
+  - Package name configuration (e.g. `com.company.app`).
+  - App name, version name, version code.
+  - Min SDK (e.g. 21) & Target SDK (e.g. 34).
+  - Android permissions toggles (`INTERNET`, `CAMERA`, `ACCESS_NETWORK_STATE`, `LOCATION`).
+• Security Center:
+  - Static AST code scanner.
+  - Scans for OWASP Top 10 mobile risks (hardcoded secrets, cleartext HTTP, SQL injection, insecure storage).
+  - One-click "Run Security Audit" with score calculation and remediation advice.
+• Billing & Entitlement Engine:
+  - 3-day free trial countdown with exact days/hours remaining in the header badge.
+  - Upgrade modal featuring Pro and Enterprise subscription tiers.
+
+================================================================================
+4. KEY FILE LOCATIONS IN WORKSPACE
+================================================================================
+• Store & State: `ide_frontend/src/core/store.ts`
+• Stream App Generator: `ide_frontend/src/core/streamAppGenerator.ts`
+• Stream Architect Modal: `ide_frontend/src/components/modals/StreamAppArchitectModal.tsx`
+• Visual Canvas: `ide_frontend/src/components/canvas/DesignCanvas.tsx`
+• Recursive Widget Renderer: `ide_frontend/src/components/canvas/WidgetRenderer.tsx`
+• Property Inspector: `ide_frontend/src/components/inspector/PropertyInspector.tsx`
+• Top Navigation: `ide_frontend/src/components/layout/Navbar.tsx`
+• Monaco Code Editor: `ide_frontend/src/components/code/CodeEditor.tsx`
+• AI Copilot / Studio: `ide_frontend/src/components/panels/GeminiCopilot.tsx`
+• Arena.ai Provider: `ide_backend/app/ai/arena_provider.py`
+• Backend Main: `ide_backend/app/main.py`
+• Schema Definitions: `ide_frontend/src/types/schema.ts`
+
+================================================================================
+5. PROMPT INSTRUCTIONS FOR CHATGPT
+================================================================================
+Copy and paste the prompt below along with this text file into ChatGPT:
+
+"""
+Hello ChatGPT! Above is the complete architecture, feature set, and technical
+specification of Suryaa IDE v3 — a cutting-edge visual Flutter studio with
+integrated FastAPI, PostgreSQL 16 Docker backend, and stream telemetry ingestion.
+
+I am looking for creative, high-impact, and futuristic ideas to take this platform
+to the next level. Please analyze the current feature set and provide concrete,
+actionable suggestions across these 5 strategic categories:
+
+1. NEXT-GEN VISUAL CANVAS & INTERACTION FEATURES:
+   - What revolutionary UI/UX capabilities can we add to the canvas emulator?
+   - Ideas for micro-interactions, responsive previewing, gesture simulators (swipe, pinch, shake),
+     or canvas collaboration.
+
+2. ADVANCED STREAMING, IOT & TELEMETRY EXPANSIONS:
+   - We already have continuous WebSocket streaming with dual-axis fl_chart, tag filtering,
+     and Dockerized PostgreSQL 16 persistence.
+   - What next-level capabilities can we add? (e.g. anomaly detection alerts, edge computing
+     simulation, custom MQTT/Kafka connector wizards, historical playback scrubbers).
+
+3. ENTERPRISE LOGIN, AUTH & SECURITY ENHANCEMENTS:
+   - We currently have 4 login styles (Cyberpunk Biometric HUD, Executive Clean SaaS,
+     Mission Control Terminal, Aurora Fintech Glass) with JWT.
+   - How can we expand this? (e.g. OAuth2 social logins, WebAuthn passkeys, biometric face-ID
+     flutter simulation, multi-tenant RBAC permissions matrix).
+
+4. AGENTIC AI & AUTOPILOT CAPABILITIES:
+   - We have Gemini, Claude, and 12+ Arena.ai free models (DeepSeek V3, Llama 3.3, Qwen 2.5).
+   - What agentic workflows would blow developers away? (e.g. "Voice-to-App" generator,
+     autonomous UI bug fixer, Figma-to-Flutter converter, automated test case generator).
+
+5. MONETIZATION, SAAS ARCHITECTURE & DEVELOPER MOATS:
+   - How can Suryaa IDE stand out against FlutterFlow, Webflow, and Supabase?
+   - Killer features that will make developers, startups, and enterprises eagerly pay for
+     a Pro or Enterprise tier.
+
+Please organize your response with clear headings, bullet points, and practical implementation details.
+"""
+================================================================================
